@@ -5,9 +5,11 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using bookit.Data;
 using bookit.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace bookit.Controllers
 {
+    [Authorize(Roles ="Admin")]
     public class BookController : Controller
     {
         private readonly ApplicationDbContext _db;
@@ -15,11 +17,28 @@ namespace bookit.Controllers
         {
             _db = db;
         }
+       
         public IActionResult Index()
         {
             var model = _db.Books;
             return View(model);
         }
+
+        [AllowAnonymous]
+        public IActionResult Gallery()
+        {
+            var model = _db.Books;
+            return View(model);
+        }
+
+        [AllowAnonymous]
+
+        public IActionResult More(int id)
+        {
+            var model = _db.Books.Find(id);
+            return View(model);
+        }
+
 
         [HttpGet]
         public IActionResult Create()

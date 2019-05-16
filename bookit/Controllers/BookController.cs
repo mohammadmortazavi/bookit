@@ -37,7 +37,7 @@ namespace bookit.Controllers
             {
                 model = _db.Books.Where(b => b.Name.Contains(term));
             }
-           
+            ViewData["term"] = term;
             return View(model);
         }
 

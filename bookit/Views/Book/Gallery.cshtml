@@ -7,6 +7,11 @@
 <h2>Book Gallery</h2>
 <hr />
 
+<form method="get">
+
+    <input class="form-inline" name="term" value="@ViewData["term"]" style="width:300px" />
+    <button type="submit" class="btn btn-primary">Search</button>
+</form>
 @foreach (var book in Model)
 {
   <partial name="_BookItem" model="book" />
